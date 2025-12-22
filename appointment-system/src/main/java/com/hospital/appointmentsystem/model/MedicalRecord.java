@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -18,10 +19,12 @@ public class MedicalRecord {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @JsonIgnoreProperties({"appointments", "medicalRecords"})
     @ManyToOne
     @JoinColumn(name = "patient_id", nullable = false)
     private com.hospital.appointmentsystem.model.Patient patient;
 
+    @JsonIgnoreProperties({"appointments", "medicalRecords"})
     @ManyToOne
     @JoinColumn(name = "doctor_id", nullable = false)
     private com.hospital.appointmentsystem.model.Doctor doctor;
